@@ -4,6 +4,7 @@
         <title>Misc app</title>
         <link rel="stylesheet" href="assets/styles.css">
         <link rel="stylesheet" href="assets/bootstrap.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
     </head>
 
     <body ng-app="miscApp">
@@ -11,7 +12,7 @@
         <section class="main-view">
 
             <top-menu>
-                <menu-item name="Todo list" state="todoList"></menu-item>
+                <menu-item name="Todo list" state="todoList"></menu-item> <!-- how to remove these tags from the DOM after all?????????? -->
                 <menu-item name="About" state="about"></menu-item>
             </top-menu>
 
@@ -30,7 +31,7 @@
 
         <script src="pages/about/about.js"></script>
         <script src="pages/todo-list/todo-list.js"></script>
-        <script src="pages/todo-create/todo-create.js"></script>
+        <script src="pages/todo-manage/todo-manage.js"></script>
 
         <script src="services/todo/todo-service.js"></script>
     </body>

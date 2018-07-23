@@ -4,7 +4,9 @@ angular.module('miscApp')
         template: `
             <nav>
                 Main menu
-                <ng-transclude></ng-transclude>
+                <ul class="nav">
+                    <ng-transclude></ng-transclude>
+                </ul>
             </nav>
         `,
         controller: function($scope, $element, $attrs) {

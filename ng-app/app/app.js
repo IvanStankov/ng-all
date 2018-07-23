@@ -14,7 +14,12 @@ angular.module('miscApp')
         .state({
             name: 'createNewTodo',
             url: '/todo-list/create',
-            component: 'createTodoItem'
+            component: 'manageTodoItem'
+        })
+        .state({
+            name: 'editTodo',
+            url: '/todo-list/:itemId',
+            component: 'manageTodoItem'
         })
         .state({
             name: 'about',

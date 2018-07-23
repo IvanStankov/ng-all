@@ -9,3 +9,12 @@
     color: green;
     font-weight: bolder;
 }
+
+.delete-todo-item {
+    cursor: pointer;
+}
+
+.delete-todo-item:hover {
+    color: red;
+    font-weight: bolder;
+}

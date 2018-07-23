@@ -3,14 +3,13 @@ angular.module('miscApp')
         require: {
             topMenu: '^^'
         },
-        transclude: true,
         bindings: {
             name: '@',
             state: '@'
         },
         template: `
-            <li class="menuItem">
-                <a ui-sref="{{::$ctrl.state}}" href="#" ng-bind="$ctrl.name" ui-sref-active="active"></a>
+            <li class="menuItem nav-item">
+                <a class="nav-link" ui-sref="{{::$ctrl.state}}" href="#" ng-bind="$ctrl.name" ui-sref-active="active"></a>
             </li>
         `,
         controller: function($scope, $element, $attrs, $log) {

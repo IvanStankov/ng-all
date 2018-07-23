@@ -16,17 +16,33 @@ angular.module('miscApp')
                 <tbody>
                     <tr ng-repeat="todo in $ctrl.todoList" ng-class="{{$odd ? 'odd' : 'even'}}">
                         <td><input type="checkbox" /></td>
-                        <td ng-bind="::todo.name"></td>
+                        <td><a ui-sref="editTodo({itemId: todo.id})" href="#" ng-bind="::todo.name"></a></td>
                         <td ng-bind="::todo.description"></td>
+                        <td ng-click="$ctrl.removeTodoItem(todo)"><i class="delete-todo-item far fa-trash-alt"></i></td>
                     </tr>
                 </tbody>
             </table>
         `,
         controller: function($scope, todoService, $log) {
-            todoService.fetchExistingTodoList()
-                .then(data => {
-                    this.todoList = data.todoItems;
-                    $log.log('Fetched data from server: ' + data.todoItems.length);
-                });
+
+
+            this.$onInit = function() {
+                this._loadTodoList();
+            };
+
+            this.removeTodoItem = function(todoItem) {
+                todoService.removeTodoItem(todoItem)
+                    .then(() => {
+                        this._loadTodoList();
+                    });
+            };
+
+            this._loadTodoList = function() {
+                todoService.fetchExistingTodoList()
+                    .then(data => {
+                        this.todoList = data.todoItems;
+                        $log.log('Fetched data from server: ' + data.todoItems.length);
+                    });
+            }
         }
     });
