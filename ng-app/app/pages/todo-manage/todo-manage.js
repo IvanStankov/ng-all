@@ -2,7 +2,7 @@ angular.module('miscApp')
     .component('manageTodoItem', {
         template: `
             <section>
-                <h1>Create a new To-Do item</h1>
+                <h1>{{::$ctrl.isNew() ? 'Create a new' : 'Edit'}} To-Do item</h1>
 
                 <form name="$ctrl.createForm" ng-submit="$ctrl.saveTodo()">
                     <div class="form-group">
@@ -21,10 +21,11 @@ angular.module('miscApp')
         controller: function(todoService, $state, $stateParams, $log) {
 
             this.$onInit = function() {
-                var passedId = $stateParams.itemId;
-                if (passedId) {
-                    $log.log('Edit todo item', passedId);
-                    todoService.fetchItem(passedId)
+                this.passedId = $stateParams.itemId;
+
+                if (!this.isNew()) {
+                    $log.log('Edit todo item', this.passedId);
+                    todoService.fetchItem(this.passedId)
                         .then(item => {
                             this.todo = item;
                         });
@@ -36,7 +37,7 @@ angular.module('miscApp')
 
             this.saveTodo = function() {
                 var promise;
-                if (this.todo.id) {
+                if (!this.isNew()) {
                     $log.log('Updating existing todo', this.todo.id);
                     promise = todoService.updateTodoItem(this.todo);
                 } else {
@@ -47,6 +48,10 @@ angular.module('miscApp')
                 promise.then(() => {
                     $state.go('todoList');
                 });
+            };
+
+            this.isNew = function() {
+                return !this.passedId;
             }
         }
     });
