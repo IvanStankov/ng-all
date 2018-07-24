@@ -32,4 +32,7 @@ angular.module('miscApp')
             }
         });
 
-    });
+    })
+    .run(['$log', function($log) {
+        $log.info('App is running!');
+    }]);
