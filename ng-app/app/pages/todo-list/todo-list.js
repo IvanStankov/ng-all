@@ -11,11 +11,17 @@ angular.module('miscApp')
                         <th></th>
                         <th>Name</th>
                         <th>Description</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="todo in $ctrl.todoList" ng-class="{{$odd ? 'odd' : 'even'}}">
-                        <td><input type="checkbox" /></td>
+                    <tr ng-repeat="todo in $ctrl.todoList" ng-class-even="'even'" ng-class-odd="'odd'">
+                        <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" ng-model="todo.done" class="custom-control-input" id="done{{todo.id}}" />
+                                <label class="custom-control-label" for="done{{todo.id}}"></label>
+                            </div>
+                        </td>
                         <td><a ui-sref="editTodo({itemId: todo.id})" href="#" ng-bind="::todo.name"></a></td>
                         <td ng-bind="::todo.description"></td>
                         <td ng-click="$ctrl.removeTodoItem(todo)"><i class="delete-todo-item far fa-trash-alt"></i></td>
