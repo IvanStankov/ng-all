@@ -1,7 +1,9 @@
 angular.module('miscApp')
     .service('todoService', function($http, $resource) {
 
-        var TodoList = $resource("http://localhost:8080/api/todo-list/:itemId", {itemId: '@id'}, {
+        var serviceUrl = "http://localhost:8080/api/todo-list/:itemId";
+
+        var TodoList = $resource(serviceUrl, {itemId: '@id'}, {
             query: {
                 method: 'GET',
                 isArray: false
@@ -39,9 +41,15 @@ angular.module('miscApp')
 
         this.updateTodoItem = function(todoItem) {
             return todoItem.$update();
-        }
+        };
 
         this.removeTodoItem = function(todoItem) {
             return TodoList.remove({itemId: todoItem.id}).$promise;
-        }
+        };
+
+        this.updateStatus = function(todoItem, newStatus) {
+            return $http.put(serviceUrl.replace(":itemId", todoItem.id) + "/status", {
+                done: newStatus
+            });
+        };
     });
